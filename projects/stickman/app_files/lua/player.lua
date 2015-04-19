@@ -4,12 +4,14 @@
 ---------------------------------------------------------------------------------
 
 -- requires
+local globals = require("app_files.lua.globals")
+local app_timer = require(globals.lua_path.."app_timer")
 
 -- player class
 
 local player = {}
 
-function player:new()
+function player.new()
 
 	-- create a new player object
 	local new_player = {}
@@ -21,6 +23,7 @@ function player:new()
 	new_player.lives = 1
 	new_player.speed = 1
 	new_player.dir = "right"
+	new_player.body = nil
 	
 	-- init player
 	function new_player:init(name)
@@ -42,6 +45,7 @@ function player:new()
 	
 	-- set player position
 	function new_player:set_position(x, y)
+	end
 	
 	return new_player
 end

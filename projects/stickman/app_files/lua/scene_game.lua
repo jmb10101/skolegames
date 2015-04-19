@@ -9,6 +9,7 @@ local scene = composer.newScene()
 local globals = require("app_files.lua.globals")
 
 local game_world_camera = require(globals.lua_path.."game_world_camera")
+local player = require(globals.lua_path.."player")
 
 -- local forward references
 
@@ -41,8 +42,14 @@ function scene:create( event )
    obj_units = self.game_camera:game_world_units_to_display_units(700,900)											
    self.ground2 = display.newImage(globals.images_path.."ground.png", obj_units.x, obj_units.y)
    
+   -- player
+   
    obj_units = self.game_camera:game_world_units_to_display_units(500,400)											-- plr
    self.plr = display.newImage(globals.images_path.."guy.png", obj_units.x, obj_units.y)
+   
+   -- this line breaks it cause player not implemented fully
+   self.plr = player.new()
+   
    
    
    -- add physics
@@ -89,6 +96,7 @@ function scene:process()
 	end
 	
 	-- move player
+	
 	if self.plr.moving == true then
 	
 		-- adjust player 
