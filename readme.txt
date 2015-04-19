@@ -1,2 +1,2 @@
 Skole Games
-Git Hub repo
+Git Hub repository
