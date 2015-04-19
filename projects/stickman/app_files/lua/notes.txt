@@ -1,0 +1,13 @@
+-- todo
+1. add player object:
+	- sprite animation
+	- double jump
+2. add pause/resume scene functionality. this is probably fairly difficult to implement, but should enable the ability to pause a scene, 
+	go to another one, then come back to this first one and resume it from where it left off.
+
+
+
+
+
+-- snippets
+
