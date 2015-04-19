@@ -43,7 +43,7 @@ function scene:create( event )
    
    obj_units = self.game_camera:game_world_units_to_display_units(600,400)											-- plr
    self.plr = display.newImage(globals.images_path.."guy.png", obj_units.x, obj_units.y)
-   self.plr.alpha = .6
+   --self.plr.alpha = .6
    -- add physics
    physics.addBody(self.ground, "static", {friction=1, bounce=0})													-- static objects
    physics.addBody(self.ground2, "static", {friction=1, bounce=0})	
