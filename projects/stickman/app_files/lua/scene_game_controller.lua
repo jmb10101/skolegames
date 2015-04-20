@@ -116,6 +116,18 @@ function scene:show( event )
 			if event.phase == "moved" then 
 
 				-- check button bounds against finger position
+				
+				
+				
+				-- IMPORTANT!
+				
+				-- multitouch events trigger false positives on touch leave and enter events.
+				-- try using bounding box around buttons instead.
+				
+				
+				
+				
+				
 				-- button x
 				if etc_graphics.does_point_intersect_rct(event.x, event.y, self.bx.x, self.bx.y, self.bx.width, self.bx.height) == false then		
 				
