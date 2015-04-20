@@ -116,30 +116,24 @@ function scene:show( event )
 			if event.phase == "moved" then 
 
 				-- check button bounds against finger position
-				
-				
-				
-				-- IMPORTANT!
-				
-				-- multitouch events trigger false positives on touch leave and enter events.
-				-- try using bounding box around buttons instead.
-				
-				
-				
-				
+				local boff = 15		-- button offset for surrounding bounding box
 				
 				-- button x
+				-- is touch outside of button?
 				if etc_graphics.does_point_intersect_rct(event.x, event.y, self.bx.x, self.bx.y, self.bx.width, self.bx.height) == false then		
 				
-					-- finger is outside of button area
-					if self.bx.is_active == true then
+					-- does touch intersect the area around the button?
+					if etc_graphics.does_point_intersect_rct(event.x, event.y, self.bx.x, self.bx.y, self.bx.width + boff, self.bx.height + boff) == true then
 					
-						-- touch leave event
-						self.bx.is_active = false
-						event.phase = "touch_leave"
-						self.parent:game_controller_button_x_touch(event)
+						-- finger is outside of button area, but inside of the offset area around the button, if button is currently active, a touch leave event has occured 
+						if self.bx.is_active == true then
+						
+							-- touch leave event
+							self.bx.is_active = false
+							event.phase = "touch_leave"
+							self.parent:game_controller_button_x_touch(event)
+						end					
 					end
-					
 				else
 				
 					-- finger is inside button area
@@ -155,15 +149,18 @@ function scene:show( event )
 				-- button y
 				if etc_graphics.does_point_intersect_rct(event.x, event.y, self.by.x, self.by.y, self.by.width, self.by.height) == false then		
 				
-					-- finger is outside of button area
-					if self.by.is_active == true then
+					-- does touch intersect the area around the button?
+					if etc_graphics.does_point_intersect_rct(event.x, event.y, self.by.x, self.by.y, self.by.width + boff, self.by.height + boff) == true then
 					
-						-- touch leave event
-						self.by.is_active = false
-						event.phase = "touch_leave"
-						self.parent:game_controller_button_y_touch(event)
+						-- finger is outside of button area
+						if self.by.is_active == true then
+						
+							-- touch leave event
+							self.by.is_active = false
+							event.phase = "touch_leave"
+							self.parent:game_controller_button_y_touch(event)
+						end
 					end
-					
 				else
 				
 					-- finger is inside button area
@@ -179,15 +176,18 @@ function scene:show( event )
 				-- button menu
 				if etc_graphics.does_point_intersect_rct(event.x, event.y, self.menu.x, self.menu.y, self.menu.width, self.menu.height) == false then		
 				
-					-- finger is outside of button area
-					if self.menu.is_active == true then
+					-- does touch intersect the area around the button?
+					if etc_graphics.does_point_intersect_rct(event.x, event.y, self.menu.x, self.menu.y, self.menu.width + boff, self.menu.height + boff) == true then
 					
-						-- touch leave event
-						self.menu.is_active = false
-						event.phase = "touch_leave"
-						self.parent:game_controller_button_menu_touch(event)
+						-- finger is outside of button area
+						if self.menu.is_active == true then
+						
+							-- touch leave event
+							self.menu.is_active = false
+							event.phase = "touch_leave"
+							self.parent:game_controller_button_menu_touch(event)
+						end
 					end
-					
 				else
 				
 					-- finger is inside button area
@@ -203,15 +203,18 @@ function scene:show( event )
 				-- directional left
 				if etc_graphics.does_point_intersect_rct(event.x, event.y, self.dl.x, self.dl.y, self.dl.width, self.dl.height) == false then		
 				
-					-- finger is outside of button area
-					if self.dl.is_active == true then
+					-- does touch intersect the area around the button?
+					if etc_graphics.does_point_intersect_rct(event.x, event.y, self.dl.x, self.dl.y, self.dl.width + boff, self.dl.height + boff) == true then
 					
-						-- touch leave event
-						self.dl.is_active = false
-						event.phase = "touch_leave"
-						self.parent:game_controller_button_dl_touch(event)
+						-- finger is outside of button area
+						if self.dl.is_active == true then
+						
+							-- touch leave event
+							self.dl.is_active = false
+							event.phase = "touch_leave"
+							self.parent:game_controller_button_dl_touch(event)
+						end
 					end
-					
 				else
 				
 					-- finger is inside button area
@@ -227,15 +230,18 @@ function scene:show( event )
 				-- directional right
 				if etc_graphics.does_point_intersect_rct(event.x, event.y, self.dr.x, self.dr.y, self.dr.width, self.dr.height) == false then		
 				
-					-- finger is outside of button area
-					if self.dr.is_active == true then
+					-- does touch intersect the area around the button?
+					if etc_graphics.does_point_intersect_rct(event.x, event.y, self.dr.x, self.dr.y, self.dr.width + boff, self.dr.height + boff) == true then
 					
-						-- touch leave event
-						self.dr.is_active = false
-						event.phase = "touch_leave"
-						self.parent:game_controller_button_dr_touch(event)
+						-- finger is outside of button area
+						if self.dr.is_active == true then
+						
+							-- touch leave event
+							self.dr.is_active = false
+							event.phase = "touch_leave"
+							self.parent:game_controller_button_dr_touch(event)
+						end
 					end
-					
 				else
 				
 					-- finger is inside button area
