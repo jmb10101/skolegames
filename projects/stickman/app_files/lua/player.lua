@@ -42,6 +42,7 @@ function player:new()
 	
 	-- set player position
 	function new_player:set_position(x, y)
+	end
 	
 	return new_player
 end
