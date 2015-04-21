@@ -45,20 +45,35 @@ function scene:create( event )
    obj_units = self.game_camera:game_world_units_to_display_units(700,900)											
    self.ground2 = display.newImage(globals.images_path.."ground.png", obj_units.x, obj_units.y)
    
+   obj_units = self.game_camera:game_world_units_to_display_units(460,868)											
+   self.ground3 = display.newImage(globals.images_path.."ground.png", obj_units.x, obj_units.y)
+   
+   obj_units = self.game_camera:game_world_units_to_display_units(300,790)											
+   self.ground4 = display.newImage(globals.images_path.."ground.png", obj_units.x, obj_units.y)
+   
+   obj_units = self.game_camera:game_world_units_to_display_units(700,900)											
+   self.ground5 = display.newImage(globals.images_path.."ground.png", obj_units.x, obj_units.y)
+   
    -- create player
    obj_units = self.game_camera:game_world_units_to_display_units(600,400)
    self.plr = player.new()
-   self.plr:init("name", globals.images_path.."guy.png", 600, 400, obj_units.x, obj_units.y)
+   self.plr:init("name", globals.images_path.."guy.png", obj_units.x, obj_units.y)
    
    -- add physics
    physics.addBody(self.ground, "static", {friction=1, bounce=0})													-- static objects
    physics.addBody(self.ground2, "static", {friction=1, bounce=0})	
+   physics.addBody(self.ground3, "static", {friction=1, bounce=0})
+   physics.addBody(self.ground4, "static", {friction=1, bounce=0})	
+   physics.addBody(self.ground5, "static", {friction=1, bounce=0})
    
    -- add display objects to scene
    sceneGroup:insert(self.bg)
    sceneGroup:insert(self.ground)
    sceneGroup:insert(self.plr.body)
    sceneGroup:insert(self.ground2)
+   sceneGroup:insert(self.ground3)
+   sceneGroup:insert(self.ground4)
+   sceneGroup:insert(self.ground5)
    
    
    -- add timers
@@ -82,6 +97,7 @@ function scene:process()
 		self.app_loop.process_app_message(nil, "change_scene", {scene = globals.app_state.gameover})
 		return
 	end
+	
 	
 	-- move player
 	self.plr:move()

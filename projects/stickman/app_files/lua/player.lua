@@ -22,16 +22,17 @@ function player:new()
 	new_player.max_health = 100
 	new_player.lives = 1
 	new_player.speed = 100					-- player's general speed in pixels per second
+	new_player.jumps = 2					-- number of jumps player has
 	new_player.dir = "none"					-- horizontal direction player is moving, can be "left", "right", or "none"
 	new_player.body = nil					-- display object representing player
 	new_player.timer = app_timer.new()		-- timer to control speed
 	
 	-- init player
-	function new_player:init(name, file, world_x, world_y, screen_x, screen_y)		
+	function new_player:init(name, file, x, y)		
 	
 		-- name player and create body
 		self.name = name
-		self.body = display.newImage(file, screen_x, screen_y)
+		self.body = display.newImage(file, x, y)
 		physics.addBody(self.body, "dynamic", {bounce=0})
 		self.body.isFixedRotation = true
 		
@@ -40,7 +41,7 @@ function player:new()
 		
 	end
 	
-	-- move player -- should be called once per frame while player is allowed to move
+	-- move player -- should be called once per frame while player is allowed to move. a dir value of "none" will not move the player
 	function new_player:move()
 	
 		-- ensure player has been initialized before continuing
@@ -57,7 +58,7 @@ function player:new()
 		end
 		
 		-- update player position
-		local xdelta = (self.timer.time/1000) * speed
+		local xdelta = (self.timer.time/1000) * speed		-- to find the change in pixels, multiply the time since last call by the player speed (in pixels per second)
 		self:translate(xdelta, 0)
 		
 		-- reset timer so that the timer's value represents the time between calls to this function
