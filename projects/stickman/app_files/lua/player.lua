@@ -11,7 +11,7 @@ local app_timer = require(globals.lua_path.."app_timer")
 
 local player = {}
 
-function player:new()
+function player.new()
 
 	-- create a new player object
 	local new_player = {}
@@ -26,6 +26,7 @@ function player:new()
 	new_player.dir = "none"					-- horizontal direction player is moving, can be "left", "right", or "none"
 	new_player.body = nil					-- display object representing player
 	new_player.timer = app_timer.new()		-- timer to control speed
+
 	
 	-- init player
 	function new_player:init(name, file, x, y)		
@@ -83,6 +84,7 @@ function player:new()
 	
 	-- set player position
 	function new_player:set_position(x, y)
+	end
 	
 		-- calculate how much to move player
 		local diffx = x - self.body.x

@@ -54,10 +54,17 @@ function scene:create( event )
    obj_units = self.game_camera:game_world_units_to_display_units(700,900)											
    self.ground5 = display.newImage(globals.images_path.."ground.png", obj_units.x, obj_units.y)
    
-   -- create player
+   -- create player																									-- plr
    obj_units = self.game_camera:game_world_units_to_display_units(600,400)
    self.plr = player.new()
    self.plr:init("name", globals.images_path.."guy.png", obj_units.x, obj_units.y)
+
+
+   
+   -- this line breaks it cause player not implemented fully
+   self.plr = player.new()
+   
+   
    
    -- add physics
    physics.addBody(self.ground, "static", {friction=1, bounce=0})													-- static objects
@@ -97,7 +104,6 @@ function scene:process()
 		self.app_loop.process_app_message(nil, "change_scene", {scene = globals.app_state.gameover})
 		return
 	end
-	
 	
 	-- move player
 	self.plr:move()
