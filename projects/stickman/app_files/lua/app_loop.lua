@@ -62,7 +62,8 @@ local app_loop = {}
 		end
 		-------------------------------------------------------------------------
 		
-		Runtime:addEventListener("enterFrame", mainLoop)	-- add main loop enterFrame listener
+		-- add main loop enterFrame listener
+		Runtime:addEventListener("enterFrame", mainLoop)	
 		
 		-- display first scene
 		app_loop.process_app_message(nil, globals.app_msg.change_scene, {scene = globals.app_state.menu})

@@ -68,7 +68,6 @@ function scene:create( event )
 	-- parent scene -- controller should be implemented as a subsene
 	self.parent = nil
 	
-   
    -- scene exit message -- use to free memory/remove event listeners
    self.exit_scene = false
    
