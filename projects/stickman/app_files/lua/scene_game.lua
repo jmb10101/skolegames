@@ -28,7 +28,7 @@ function scene:create( event )
    self.exit_scene = false
    
    -- create game world properties and camera
-   local game_world_area_width = 1000
+   local game_world_area_width = 2000
    local game_world_area_height = 1000
    
    self.game_camera = game_world_camera.new()
@@ -39,49 +39,56 @@ function scene:create( event )
    local obj_units = self.game_camera:game_world_units_to_display_units(400,800)									-- bg
    self.bg = display.newImage(globals.images_path.."bg.png", obj_units.x, obj_units.y)
    
-   obj_units = self.game_camera:game_world_units_to_display_units(600,500)											-- ground
-   self.ground = display.newImage(globals.images_path.."ground.png", obj_units.x, obj_units.y)
+   obj_units = self.game_camera:game_world_units_to_display_units(1400,800)									
+   self.bg2 = display.newImage(globals.images_path.."bg.png", obj_units.x, obj_units.y)
    
-   obj_units = self.game_camera:game_world_units_to_display_units(700,900)											
-   self.ground2 = display.newImage(globals.images_path.."ground.png", obj_units.x, obj_units.y)
+   obj_units = self.game_camera:game_world_units_to_display_units(150,850)											-- ground
+   self.ground = display.newImage(globals.images_path.."large_dirt.png", obj_units.x, obj_units.y)
    
-   obj_units = self.game_camera:game_world_units_to_display_units(460,868)											
-   self.ground3 = display.newImage(globals.images_path.."ground.png", obj_units.x, obj_units.y)
+   obj_units = self.game_camera:game_world_units_to_display_units(550,1000)											
+   self.ground2 = display.newImage(globals.images_path.."large_dirt.png", obj_units.x, obj_units.y)
+ 
    
-   obj_units = self.game_camera:game_world_units_to_display_units(300,790)											
-   self.ground4 = display.newImage(globals.images_path.."ground.png", obj_units.x, obj_units.y)
+   obj_units = self.game_camera:game_world_units_to_display_units(355,905)											
+   self.ground4 = display.newImage(globals.images_path.."large_dirt.png", obj_units.x, obj_units.y)
+   self.ground4.rotation = 30
    
-   obj_units = self.game_camera:game_world_units_to_display_units(700,900)											
-   self.ground5 = display.newImage(globals.images_path.."ground.png", obj_units.x, obj_units.y)
+   obj_units = self.game_camera:game_world_units_to_display_units(800,950)											-- tree platforms / trunks
+   self.tree1 = display.newImage(globals.images_path.."tree_trunk.png", obj_units.x, obj_units.y) 
+
+   obj_units = self.game_camera:game_world_units_to_display_units(900,1050)
+   self.tree2 = display.newImage(globals.images_path.."tree_trunk.png", obj_units.x, obj_units.y)  
+
+   obj_units = self.game_camera:game_world_units_to_display_units(1000,1000)
+   self.tree3 = display.newImage(globals.images_path.."tree_trunk.png", obj_units.x, obj_units.y)    
+   
    
    -- create player																									-- plr
-   obj_units = self.game_camera:game_world_units_to_display_units(600,400)
+   obj_units = self.game_camera:game_world_units_to_display_units(50,686)
    self.plr = player.new()
-   self.plr:init("name", globals.images_path.."guy.png", obj_units.x, obj_units.y)
-
-
-   
-   -- this line breaks it cause player not implemented fully
-   self.plr = player.new()
+   self.plr:init("name", globals.images_path.."plr_sheet.png", obj_units.x, obj_units.y)
    
    
    
    -- add physics
-   physics.addBody(self.ground, "static", {friction=1, bounce=0})													-- static objects
-   physics.addBody(self.ground2, "static", {friction=1, bounce=0})	
-   physics.addBody(self.ground3, "static", {friction=1, bounce=0})
-   physics.addBody(self.ground4, "static", {friction=1, bounce=0})	
-   physics.addBody(self.ground5, "static", {friction=1, bounce=0})
+   physics.addBody(self.ground, "static", {friction=.5, bounce=0})													-- static objects
+   physics.addBody(self.ground2, "static", {friction=.5, bounce=0})	
+   physics.addBody(self.ground4, "static", {friction=.5, bounce=0})	
+   physics.addBody(self.tree1, "static", {friction=.5, bounce=0})
+   physics.addBody(self.tree2, "static", {friction=.5, bounce=0})
+   physics.addBody(self.tree3, "static", {friction=.5, bounce=0})
    
    -- add display objects to scene
    sceneGroup:insert(self.bg)
+   sceneGroup:insert(self.bg2)
    sceneGroup:insert(self.ground)
-   sceneGroup:insert(self.plr.body)
    sceneGroup:insert(self.ground2)
-   sceneGroup:insert(self.ground3)
    sceneGroup:insert(self.ground4)
-   sceneGroup:insert(self.ground5)
+   sceneGroup:insert(self.tree1)
+   sceneGroup:insert(self.tree2)  
+   sceneGroup:insert(self.tree3)  
    
+   sceneGroup:insert(self.plr.body)
    
    -- add timers
    
@@ -103,6 +110,11 @@ function scene:process()
 		self.exit_scene = true
 		self.app_loop.process_app_message(nil, "change_scene", {scene = globals.app_state.gameover})
 		return
+	end
+	
+	-- block player from leaving game world area
+	if world_units.x < (self.plr.body.width/2) then	
+		self.plr.body.x = (self.plr.body.width/2)
 	end
 	
 	-- move player
